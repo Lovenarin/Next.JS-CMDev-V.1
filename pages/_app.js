@@ -3,7 +3,7 @@ import App from "next/app";
 import Head from "next/head";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import "../styles/index.css";
+import "../assets/css/index.css";
 
 export default function CMApp({ Component, pageProps }) {
   return (

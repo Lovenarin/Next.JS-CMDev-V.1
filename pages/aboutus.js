@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/alert.module.css";
+import styles from "../assets/css/alert.module.css";
 
 export default function Aboutus() {
   return (
