@@ -10,6 +10,8 @@ export default function () {
         {" | "}
         <Link href="/services">Services</Link>
         {" | "}
+        <Link href="/movies">Movies</Link>
+        {" | "}
         <Link href="/aboutus">AboutUs</Link>
       </nav>
     </>
