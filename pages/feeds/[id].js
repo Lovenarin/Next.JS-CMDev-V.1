@@ -1,6 +1,13 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 export default function Feed({ movies }) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <h1>Movies</h1>
@@ -32,7 +39,7 @@ export async function getStaticPaths() {
       { params: { id: "songs" } },
       { params: { id: "superhero" } },
     ],
-    fallback: false,
+    fallback: true,
   };
 }
 
