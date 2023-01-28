@@ -1,12 +1,17 @@
 import React from "react";
+import { useRouter } from "next/router";
 
-export default function Movies({ movies, randomData }) {
-  debugger;
-  console.log("1234");
+export default function Feed({ movies }) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <h1>Movies</h1>
-      <span>{randomData}</span>
+
       <ul>
         {movies.map((movie, index) => {
           return (
@@ -27,16 +32,26 @@ export default function Movies({ movies, randomData }) {
 }
 
 // This function gets called at build time
-export async function getStaticProps() {
-  const url =
-    "https://codemobiles.com/adhoc/youtubes/index_new.php?username=admin&passwoed=password&type=foods";
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { id: "foods" } },
+      { params: { id: "songs" } },
+      { params: { id: "superhero" } },
+    ],
+    fallback: true,
+  };
+}
+
+// This function gets called at build time
+export async function getStaticProps({ params }) {
+  const url = `https://codemobiles.com/adhoc/youtubes/index_new.php?username=admin&passwoed=password&type=${params.id}`;
   const res = await fetch(url);
   const data = await res.json();
 
   return {
     props: {
       movies: data.youtubes,
-      randomData: Math.random().toString(),
     },
   };
 }

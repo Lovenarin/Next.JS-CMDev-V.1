@@ -1,8 +1,7 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 export default function Movies({ movies, randomData }) {
-  debugger;
-  console.log("1234");
   return (
     <div>
       <h1>Movies</h1>
@@ -27,9 +26,11 @@ export default function Movies({ movies, randomData }) {
 }
 
 // This function gets called at build time
-export async function getStaticProps() {
-  const url =
-    "https://codemobiles.com/adhoc/youtubes/index_new.php?username=admin&passwoed=password&type=foods";
+export async function getServerSideProps(context) {
+  const { type } = context.query;
+
+  // songs, foods, superhero
+  const url = `https://codemobiles.com/adhoc/youtubes/index_new.php?username=admin&passwoed=password&type=${type}`;
   const res = await fetch(url);
   const data = await res.json();
 
